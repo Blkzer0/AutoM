@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#Script runs with lea.kz api. Theres only three lookup functions. Search for Emails, Hashs and to create a hash from md5-sha1/512.
+#Never input any private passwords or your personal information as the author of the wesbite is unknown. 
+
+email(){
+    echo ""
+    read -p "What email to search?:" email
+    curl https://lea.kz/api/mail/$email
+}
+
+crack(){
+    echo ""
+    read -p "What hash to crack?:" hash1
+    curl https://lea.kz/api/hash/$hash1
+}
+
+create(){
+    echo ""
+    read -p "What password to encrypt?:" pass
+    curl https://lea.kz/api/password/$pass
+}
+
+    echo -e " \n[1] Search for email"
+    echo "[2] Crack a MD5/SHA512 hash"
+    echo "[3] Encrypt a passwd "
+    echo ""
+    read -p "#>" num
+if [ $num == '1' ]
+    then
+    email
+elif [ $num == '2' ]
+    then
+    crack
+elif [ $num == '3' ]
+    then
+    create
+fi
