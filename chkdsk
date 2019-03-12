@@ -1,0 +1,18 @@
+#!/bin/bash 
+#Checks disk for bad blocks/Problems
+if [[ $EUID -ne 0 ]]; then
+	echo "N33ds R00t Br0!"
+	exit 1
+fi 
+
+echo " Checking Disk for Problems "
+  lsblk
+read -p " What is the drive ID?:"
+  smartctl -a $drive
+read -p " Check for bad blocks [Will take some time]?:" $ans
+
+if [ $ans == 'y' ] then
+  badblocks -v $drive > /tmp/bad-blocks-report.txt
+elif [ $ans == 'n' ] then
+exit 0
+fi
