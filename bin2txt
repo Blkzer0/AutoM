@@ -1,0 +1,25 @@
+#!/bin/bash
+
+bin(){
+read -p " Enter Binary to Convert:" bin
+echo $bin | perl -lape '$_=pack"(B8)*",@F'
+}
+
+txt(){
+read -p " Enter Text to Convert:" txt
+echo $txt | perl -lpe '$_=join " ", unpack"(B8)*"'
+}
+
+echo " ======================"
+echo " Binary/ascii converter"
+echo " ======================"
+echo " [1] Convert Binary to Text"
+echo " [2] Convert Text to Binary"
+read -p "Choice:" choice
+if [ $choice == '1' ] 
+then
+bin
+elif [ $choice == '2' ]
+then
+txt
+fi
