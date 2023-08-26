@@ -1,0 +1,26 @@
+#!/bin/bash
+#scripts has two options, either scan a singular ip address or scan a list of ip addresses using ipinfo.io
+
+check1(){
+read -p "What is the IP?:" IP
+curl ipinfo.io/$IP
+}
+
+check2(){
+read -p "Path to ip list:" list
+for ip in $(cat $list); do echo -n "$ip:"; curl -s ipinfo.io/"$ip" | jq .org; done
+}
+
+echo "======MENU=========="
+echo " [1] Scan IP address"
+echo " [2] Scan IP list"
+echo " ===================="
+read -p "Select #:" checks
+if [ "$checks" == '1' ]
+then
+check1
+elif [ "$checks" == '2' ]
+then
+check2
+exit
+fi
